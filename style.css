@@ -1,7 +1,7 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #1a1a1a; /* Dark background */
-    color: #fff; /* White text color */
+    background-color: #1a1a1a; 
+    color: #fff; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,12 +16,12 @@ body {
 }
 
 h1, h2 {
-    color: #9a60b9; /* Purple color for headings */
+    color: #9a60b9; 
     text-align: center;
 }
 
 .form-container, .meal-plan-container {
-    background-color: #333; /* Darker box backgrounds */
+    background-color: #333;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -46,7 +46,7 @@ input, select, button {
 }
 
 button {
-    background-color: #9a60b9; /* Purple button */
+    background-color: #9a60b9; 
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #7e3f9d; /* Slightly darker purple on hover */
+    background-color: #7e3f9d; 
 }
 
 .hidden {
