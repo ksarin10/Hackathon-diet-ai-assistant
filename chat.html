@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meal Plan Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Meal Plan Generator</h1>
+
+      <div class="form-container">
+        <div class="input-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" placeholder="Age" />
+        </div>
+        <div class="input-group">
+          <label for="gender">Gender:</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="weight">Weight (kg):</label>
+          <input type="number" id="weight" placeholder="Weight (kg)" />
+        </div>
+        <div class="input-group">
+          <label for="height">Height (cm):</label>
+          <input type="number" id="height" placeholder="Height (cm)" />
+        </div>
+        <button onclick="getMealPlan()">Get Meal Plan</button>
+      </div>
+
+      <div class="meal-plan-container hidden" id="mealPlanContainer">
+        <h2>Your Custom Meal Plan</h2>
+        <div id="mealPlan"></div>
+      </div>
+    </div>
+
+    <script>
+      function getMealPlan() {
+        var age = document.getElementById("age").value;
+        var gender = document.getElementById("gender").value;
+        var weight = document.getElementById("weight").value;
+        var height = document.getElementById("height").value;
+
+        fetch("/get-meal-plan", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ age, gender, weight, height }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            var content = `<h3>Recommended Diet: ${data.dietType}</h3>`;
+            content += `<div><strong>Meal Plan:</strong>${data.mealPlan}</div>`;
+            document.getElementById("mealPlan").innerHTML = content;
+            document
+              .getElementById("mealPlanContainer")
+              .classList.remove("hidden");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document
+              .getElementById("mealPlanContainer")
+              .classList.add("hidden");
+          });
+      }
+    </script>
+  </body>
+</html>
